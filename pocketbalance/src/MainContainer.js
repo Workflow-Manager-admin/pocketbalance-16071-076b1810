@@ -129,7 +129,19 @@ function TransactionList({ transactions }) {
 
 function AddTransactionModal({ isOpen, onClose, onAdd, categories }) {
   if (!isOpen) return null;
-  // Placeholder modal with no real form logic yet
+  // Demo logic: clicking "Demo Add Income" will add a new income transaction
+  function handleDemoAddIncome() {
+    const demoIncome = {
+      id: `inc-${Date.now()}`,
+      amount: 100.0,
+      category: "Salary",
+      description: "Demo Salary",
+      type: "income",
+      timestamp: new Date().toISOString(),
+    };
+    onAdd(demoIncome);
+  }
+
   return (
     <div style={{
       position:"fixed", left:0, top:0, right:0, bottom:0,
@@ -139,6 +151,7 @@ function AddTransactionModal({ isOpen, onClose, onAdd, categories }) {
         background:"var(--kavia-dark)", padding:32, borderRadius:8, minWidth:320, maxWidth:360, boxShadow: "0 2px 12px rgba(0,0,0,0.18)"
       }}>
         <div style={{marginBottom:16, fontWeight:600}}>Add Income/Expense (Modal Placeholder)</div>
+        <button className="btn" style={{marginBottom:8}} onClick={handleDemoAddIncome}>Demo Add Income</button>
         <button className="btn" onClick={onClose}>Close</button>
       </div>
     </div>
