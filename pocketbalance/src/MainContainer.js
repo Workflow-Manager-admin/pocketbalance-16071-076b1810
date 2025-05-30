@@ -222,10 +222,19 @@ function MainContainer() {
   // Placeholder add handler for floating action button
   function handleOpenAddModal() { setIsAddModalOpen(true); }
   function handleCloseAddModal() { setIsAddModalOpen(false); }
-  function handleAddTransaction(/* transaction */) {
-    // Will be implemented; for now just close modal
+
+  // PUBLIC_INTERFACE
+  /**
+   * Add a new transaction (income/expense), update state & localStorage.
+   * @param {object} transaction - New transaction object with {amount, category, description, type, timestamp}
+   */
+  function handleAddTransaction(transaction) {
+    // Defensive copy and add to beginning (newest first)
+    setTransactions(prev => [transaction, ...prev]);
     setIsAddModalOpen(false);
+    // No need to manually update localStorage here; effect will handle.
   }
+
   function handleFilterChange(newFilter) {
     setFilter(newFilter);
   }
